@@ -1,24 +1,12 @@
 import express from "express";
-import User from "../models/users.model";
+import { getUsers, login, register } from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-// get all users
-router.get('/', async (req, res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-});
 
-// gets a single user
-router.get('/:id', async (req, res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-})
+//register a user
+router.post("/register", register);
+router.post("/login", login);
+router.get("/", getUsers);
 
 export default router;

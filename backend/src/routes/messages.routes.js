@@ -1,22 +1,9 @@
 import express from "express";
-import Message from "../models/message.model";
+import { sendMessage, getMessages } from "../controllers/messages.controller.js";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-});
-
-router.get("/:conversationId", async (req, res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-});
+router.post("/", sendMessage);
+router.get("/:conversationId", getMessages);
 
 export default router;

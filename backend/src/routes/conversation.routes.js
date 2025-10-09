@@ -1,22 +1,9 @@
-import express from "express"
-import Conversation from "../models/conversation.model";
+import { Router } from "express";
+import { createConversation, getUserConversations} from "../controllers/conversation.controller.js";
 
-const router = express.Router();
+const router = Router();
 
-router.post('/', async (req, res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-});
-
-router.get('/:userId', async (req, res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-});
+router.post("/", createConversation);
+router.get("/:userId", getUserConversations);
 
 export default router;

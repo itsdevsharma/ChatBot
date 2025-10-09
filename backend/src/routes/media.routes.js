@@ -1,27 +1,9 @@
 import express from "express";
-import Media from "../models/media.model";
-import multer from "multer";
-import path from "path";
+import { uploadMedia, getMediaByMessage } from "../controllers/media.controller.js";
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-    destination: (req, res, cb) => {
-        cb(null, "uploads/");
-    },
-    filename: (req, res, cb) => {
-         cb(null, Date.now() + path.extname(file.originalName));
-    }
-});
-
-const upload = multer({storage});
-
-router.post("/upload", async (req, res) => {
-    try {
-        
-    } catch (error) {
-        
-    }
-});
+router.post("/", uploadMedia);
+router.get("/:messageId", getMediaByMessage);
 
 export default router;

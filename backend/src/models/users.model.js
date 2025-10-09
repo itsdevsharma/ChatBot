@@ -1,36 +1,42 @@
 import mongoose from "mongoose";
+import bcrypt from 'bcrypt';
 
-const userSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema(
+  {
     userName: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     email: {
-        type: String,
-        required: true,
-        unique: true,
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-        type: string,
-        required: true,
+      type: String,
+      required: true,
     },
     profilePic: {
-        type: string,
+      type: String,
     },
     isOnline: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
     lastSeen: {
-        type: Date,
+      type: Date,
     },
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], // List of friends for user
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
+  },
+  {
+    timestamps: true,
+  }
+);
+
+userSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
 });
 
-
-
-export const User = mongoose.model('user', userSchema);
+export const User = mongoose.model("user", userSchema);
